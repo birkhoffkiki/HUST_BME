@@ -2,6 +2,7 @@
 #include"Matrix.h"
 #include<iostream>
 #include<iomanip>
+#include"mat.h"
 using namespace std;
 Matrix::Matrix()
 {
@@ -79,6 +80,16 @@ void Matrix::set(int row, int col, double v)
 	}
 }
 
+double Matrix::get(int row, int col)
+{
+	if (row >= 0 && row < this->row && col >= 0 && col < this->col)
+	{
+		return *(this->value + row*this->col + col);
+	}
+	else
+		return 0;
+}
+
 void Matrix::print()
 {
 	for (int i = 0;i < this->row;i++)
@@ -94,4 +105,78 @@ void Matrix::print()
 Matrix::~Matrix()
 {
 	delete [] value;
+}
+
+Matrix operator+(const Matrix & n, const Matrix & m)
+{
+	Matrix result;
+	mat op;
+	result = op.add(n, m);
+	return result;
+}
+
+Matrix operator+(const double n, const Matrix & m)
+{
+	mat op;
+	return op.add(n,m);
+}
+
+Matrix operator+(const Matrix & n, const double m)
+{
+	mat op;
+	return op.add(n,m);
+}
+
+Matrix operator-(const Matrix & n, const Matrix & m)
+{
+	mat op;
+	return op.sub(n,m);
+}
+
+Matrix operator-(const Matrix & n, const double m)
+{
+	mat op;
+	return op.sub(n,m);
+}
+
+Matrix operator-(const double m, const Matrix & n)
+{
+	mat op;
+	return op.sub(m,n);
+}
+
+Matrix operator*(const Matrix & n, const Matrix & m)
+{
+	mat op;
+	return op.mul(n,m);
+}
+
+Matrix operator*(const double n, const Matrix & m)
+{
+	mat op;
+	return op.mul(n, m);
+}
+
+Matrix operator*(const Matrix & n, const double m)
+{
+	mat op;
+	return op.mul(n,m);
+}
+
+Matrix operator/(const Matrix & n, const Matrix & m)
+{
+	mat op;
+	return op.div(n,m);
+}
+
+Matrix operator/(const Matrix & n, const double m)
+{
+	mat op;
+	return op.div(n,m);
+}
+
+Matrix operator/(const double n, const Matrix & m)
+{
+	mat op;
+	return op.div(n,m);
 }

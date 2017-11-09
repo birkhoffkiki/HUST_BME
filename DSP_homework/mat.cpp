@@ -4,6 +4,8 @@
 #include<math.h>
 using namespace std;
 
+double mat::pi = 3.141592654;
+
 Matrix mat::conv(Matrix n, Matrix m)
 {
 	if (n.row == 1 && m.row == 1 || n.col==1 && m.col == 1)
@@ -132,6 +134,32 @@ Matrix mat::add(Matrix n, Matrix m)
 		return Matrix();
 }
 
+Matrix mat::add(Matrix n, double m)
+{
+	Matrix sum = Matrix(n.row, n.col);
+	for (int i = 0;i < n.row;i++)
+	{
+		for (int j = 0;j < n.col;j++)
+		{
+			*(sum.value + i*n.col + j) = *(n.value + i*n.col + j) + m;
+		}
+	}
+	return sum;
+}
+
+Matrix mat::add(double m, Matrix n)
+{
+	Matrix sum = Matrix(n.row, n.col);
+	for (int i = 0;i < n.row;i++)
+	{
+		for (int j = 0;j < n.col;j++)
+		{
+			*(sum.value + i*n.col + j) = *(n.value + i*n.col + j) + m;
+		}
+	}
+	return sum;
+}
+
 Matrix mat::sub(Matrix n, Matrix m)
 {
 	if (n.row == m.row && n.col == m.col)
@@ -148,6 +176,32 @@ Matrix mat::sub(Matrix n, Matrix m)
 	}
 	else
 		return Matrix();
+}
+
+Matrix mat::sub(Matrix n, double m)
+{
+	Matrix sum = Matrix(n.row, n.col);
+	for (int i = 0;i < n.row;i++)
+	{
+		for (int j = 0;j < n.col;j++)
+		{
+			*(sum.value + i*n.col + j) = *(n.value + i*n.col + j) - m;
+		}
+	}
+	return sum;
+}
+
+Matrix mat::sub(double m, Matrix n)
+{
+	Matrix sum = Matrix(n.row, n.col);
+	for (int i = 0;i < n.row;i++)
+	{
+		for (int j = 0;j < n.col;j++)
+		{
+			*(sum.value + i*n.col + j) = m-*(n.value + i*n.col + j);
+		}
+	}
+	return sum;
 }
 
 Matrix mat::mul(Matrix n, Matrix m)
@@ -223,6 +277,32 @@ Matrix mat::div(Matrix n, double m)
 		}
 	}
 	return sum;
+}
+
+Matrix mat::div(double m, Matrix n)
+{
+	Matrix sum = Matrix(n.row, n.col);
+	for (int i = 0;i < n.row;i++)
+	{
+		for (int j = 0;j < n.col;j++)
+		{
+			*(sum.value + i*n.col + j) =m/ *(n.value + i*n.col + j) ;
+		}
+	}
+	return sum;
+}
+
+Matrix mat::tanm(Matrix n)
+{
+	Matrix result(n.row, n.col);
+	for (int i = 0;i < n.row;i++)
+	{
+		for (int j = 0;j < n.col;j++)
+		{
+			*(result.value + i*n.col + j) = tan(*(n.value + i*n.col + j));
+		}
+	}
+	return result;;
 }
 
 Matrix mat::sinm(Matrix n)
@@ -303,6 +383,19 @@ Matrix mat::sqrtm(Matrix n)
 	return result;;
 }
 
+double mat::sum(Matrix n)
+{
+	double sum = 0;
+	for (int i = 0;i < n.row;i++)
+	{
+		for (int j = 0;j < n.col;j++)
+		{
+			sum = sum + *(n.value + i*n.col + j);
+		}
+	}
+	return sum;
+}
+
 Matrix mat::seq(double init, double step, double end)
 {
 	int length = (int)((end - init) / step);
@@ -354,10 +447,26 @@ Matrix mat::randn(int row, int col, int seed)
 	return result;
 }
 
-Matrix mat::DTFT(Matrix n, Matrix w)
+Matrix mat::DTFT(Matrix n, Matrix w, int type)
 {
+	if (n.row == 1 || n.col == 1 && w.row == 1 || w.col == 1) {
+		Matrix result = Matrix(w.row, w.col);
+		int L = w.row*w.col;
+		Matrix real, imag;
+		mat op;
+		real = op.matmul(n, op.cosm(op.matmul(n.T(), w)));
+		imag = -1*op.matmul(n, op.sinm(op.matmul(n.T(), w)));
+		if (type == 0)
+		{
+			return op.sqrtm(op.powm(real, 2) + op.powm(imag, 2));
+		}
+	
+	}
+	
+	
 	return Matrix();
 }
+
 
 Matrix mat::reverse(Matrix n)
 {
