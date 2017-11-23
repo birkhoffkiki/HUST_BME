@@ -447,26 +447,23 @@ Matrix mat::randn(int row, int col, int seed)
 	return result;
 }
 
-Matrix mat::DTFT(Matrix n, Matrix w, int type)
+Matrix mat::DFT(Matrix n, int type)
 {
-	if (n.row == 1 || n.col == 1 && w.row == 1 || w.col == 1) {
-		Matrix result = Matrix(w.row, w.col);
-		int L = w.row*w.col;
+	if (n.row == 1) {
+		Matrix result = Matrix(n.row, n.col);
+		Matrix k = seq(0, 1, n.col);
 		Matrix real, imag;
-		mat op;
-		real = op.matmul(n, op.cosm(op.matmul(n.T(), w)));
-		imag = -1*op.matmul(n, op.sinm(op.matmul(n.T(), w)));
+		real = matmul(n,cosm(matmul(k.T(), -2*mat::pi*k/n.col)));
+		imag = -1*matmul(n, sinm(matmul(k.T(), -2*mat::pi*k/n.col)));
 		if (type == 0)
 		{
-			return op.sqrtm(op.powm(real, 2) + op.powm(imag, 2));
+			return sqrtm(powm(real, 2) + powm(imag, 2));
 		}
 	
 	}
 	
-	
 	return Matrix();
 }
-
 
 Matrix mat::reverse(Matrix n)
 {

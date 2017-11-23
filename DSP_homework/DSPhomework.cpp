@@ -7,14 +7,13 @@ using namespace std;
 int main()
 {
 	mat op;
-	double a[] = { 1,2,3,4,5,6 };
+	double a[] = { 1,2,3,4,5,6};
 	double b[] = { 2,3,4,5,6,7 };
 
-	Matrix n(a,1,6) ;
-	Matrix w = op.seq(0,mat::pi / 6 ,mat::pi);
-	w.print();
+	Matrix n = op.seq(1.2, 0.3, 3.4);
+	n.print();
 	Matrix result;
-	result = op.DTFT(n, w);
+	result = op.DFT(n);
 	result.print();
 
 	/*

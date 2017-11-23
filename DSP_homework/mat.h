@@ -39,7 +39,7 @@ public:
 	Matrix ones(int row, int col);					//matlab ones
 	Matrix randn(int row, int col, int seed = 0);	//产生0-1随机数矩阵。
 
-	Matrix DTFT(Matrix n, Matrix w ,int type=0);		//计算离散时间傅里叶变换，type=0,返回幅度，type=1,返回相位。两数列均为一维。
+	Matrix DFT(Matrix n, int type=0);		//计算离散时间傅里叶变换，type=0,返回幅度，type=1,返回相位。n为行向量。
 
 	Matrix reverse(Matrix n);			//一维数组反序，多维返回空矩阵。
 };
