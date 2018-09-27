@@ -59,7 +59,23 @@ def get_data(filename,augment = True):
         return [aug_img,aug_label,test_data,test_label]
     return [train_data,train_label,test_data,test_label]
 
+def get_data_for_tune(filename):
+    data = pd.read_csv(filename)
+    data = data.sample(frac=1)  #shuffle data
+    train_data = list()
+    train_label = list()
+    print('convert data..')
+    for i in tqdm(range(124)):
+        row = data.loc[i]
+        img = np.array([int(ele) for ele in row[1].split()]).reshape(48,48)/255.
+        train_data.append(img)
+        label = np.zeros(shape=[7,])
+        label[row[0]] = 1
+        train_label.append(label)
 
+    train_data = np.stack(train_data).astype(np.float32).reshape([-1,48,48,1])
+    train_label = np.stack(train_label)
+    return [train_data,train_label]
 def identity_block(input_tensor, kernel_size, filters, stage, block,
                    use_bias=True):
     """The identity_block is the block that has no conv layer at shortcut
