@@ -1,0 +1,5 @@
+﻿  Algorithm_Introduction.cpp
+  sort.cpp
+  正在生成代码...
+E:\GitHub_Projects\HUST_BME\Algorithm_Introduction\Algorithm_Introduction.cpp(12,20): warning C4018:  “<”: 有符号/无符号不匹配
+  Algorithm_Introduction.vcxproj -> E:\GitHub_Projects\HUST_BME\Algorithm_Introduction\Debug\Algorithm_Introduction.exe

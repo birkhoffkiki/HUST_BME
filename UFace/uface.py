@@ -39,12 +39,19 @@ class GUI():
 
     def open_image(self):
         try:
-            filename = filedialog.askopenfilename(initialdir='/home/kara')
+            filename = filedialog.askopenfilename()
             self.image_name = filename
             global canvas_plot_image
-            canvas_plot_image = tk.PhotoImage(file = filename)
+            if '.gif' in self.image_name :
+                canvas_plot_image = tk.PhotoImage(file = filename)
+                from skimage.io import imread
+                self.meta_image = imread(filename)
+                self.board.create_image(200,50,anchor = 'nw',image = canvas_plot_image)
+                self.start_predict_button.pack()
             #width = canvas_plot_image.width()
             #height = canvas_plot_image.height()
+            else:
+                self.expression_info_label['text'] =' We only support gif file!'
             """
             if width>self.window_width or height > self.window_height:
                 if width/self.window_width >height/self.window_height:
@@ -54,11 +61,7 @@ class GUI():
             """
             #x = int((self.window_height-width)/2)
             #y = int((self.window_height-height)/2)
-            from skimage.io import imread
-            
-            self.meta_image = imread(filename)
-            self.board.create_image(200,50,anchor = 'nw',image = canvas_plot_image)
-            self.start_predict_button.pack()
+
         except:
             self.expression_info_label['text'] = "Opps,check file type and try again"
     def g_menu(self):
