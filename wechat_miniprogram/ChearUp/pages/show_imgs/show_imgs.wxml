@@ -1,0 +1,10 @@
+<!--index.wxml-->
+<view class="downView" >
+
+    <view class="showView">
+        <image src="{{imageUserScr}}" class="gesturesImgR"></image>
+    </view>
+    <text>\n\n</text>
+    <button class="againBtn" bindtap="again">Merry Christmas</button>  
+
+</view>

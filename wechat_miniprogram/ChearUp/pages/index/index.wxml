@@ -1,0 +1,14 @@
+<!--index.wxml-->
+
+<view class="downView" >
+  <text>\n\n\n</text>
+  <view class='anti_counter'><text>{{countDownNum}}</text></view>
+  <text>\n\n\n</text>
+
+  <text class='other'>When you are not happy!</text>
+  <text>\n</text>
+  <text class='other'>Just open me</text>
+  <text>\n\n</text>
+  <button class="againBtn" bindtap="again">{{btn}}</button>  
+
+</view>

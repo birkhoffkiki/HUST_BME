@@ -1,0 +1,13 @@
+<!--pages/come_on.wxml-->
+<view class='downView'>
+  <text>\n</text>
+  <text>If you were upset\n\n Don't be alone\n\n</text>
+  <text>Don't be afraid\n\n I am always by your side\n\n</text>
+  <text>Encouraging you\n\nCalm down and take a deep breath\n\n</text>
+  <text>Just do what you want\n\n</text>
+  <text>Nobody can restrain you\n\n</text>
+  <text>Thinking, Thinking\n\n</text>
+  <text>Practicing, Practicing\n\n</text>
+  <text>You'll break through\n\n</text>
+  <text>---Mr. M</text>
+</view>
